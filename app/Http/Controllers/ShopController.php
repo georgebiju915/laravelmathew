@@ -12,6 +12,7 @@ class ShopController extends Controller
         return view('shop', compact('products'));
     }
 
+
     public function addToCart(Request $request)
     {
         $user_id = session('user_id');

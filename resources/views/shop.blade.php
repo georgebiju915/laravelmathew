@@ -1,5 +1,5 @@
 @include('header')
-
+@extends('layouts.app')
 <div class="heading">
     <h3>our shop</h3>
     <p> <a href="{{ url('home') }}">home</a> / shop </p>

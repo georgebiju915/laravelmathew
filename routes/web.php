@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\OrderController;
@@ -12,6 +11,8 @@ use App\Http\Controllers\Admin\AdminController;
 Route::get('/', function () {
     return view('welcome');
 });
+
+// Admin routes
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
     Route::get('/orders', [AdminController::class, 'orders'])->name('orders');
@@ -26,16 +27,23 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/contacts', [AdminController::class, 'contacts'])->name('contacts');
     Route::get('/contacts/delete/{id}', [AdminController::class, 'deleteContact'])->name('contacts.delete');
 });
+
+// Shop routes
 Route::get('shop', [ShopController::class, 'index']);
 Route::post('add_to_cart', [ShopController::class, 'addToCart']);
 
-Route::get('search_page', [SearchController::class, 'index']);
+// Search routes
+Route::post('/search', [SearchController::class, 'index'])->name('search');
 Route::post('search_page', [SearchController::class, 'index']);
 Route::post('add_to_cart', [SearchController::class, 'addToCart']);
 
+// Order routes
 Route::get('orders', [OrderController::class, 'index']);
 
+// Logout route
 Route::get('logout', [LogoutController::class, 'logout']);
+
+// Home route
 Route::get('/', function () {
     return view('home');
 })->name('home');
@@ -66,3 +74,8 @@ Route::get('/checkout', [OrderController::class, 'checkout'])->name('checkout');
 // Message routes
 Route::get('/contact', [MessageController::class, 'showContactForm'])->name('contact');
 Route::post('/contact', [MessageController::class, 'send'])->name('contact.send');
+
+// About route
+Route::get('/about', function () {
+    return view('about');
+})->name('about');

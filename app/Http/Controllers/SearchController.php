@@ -8,13 +8,9 @@ class SearchController extends Controller
 {
     public function index(Request $request)
     {
-        $products = [];
-        if ($request->has('search')) {
-            $search_item = $request->search;
-            $products = Product::where('name', 'LIKE', '%' . $search_item . '%')->get();
-        }
-
-        return view('search_page', compact('products'));
+            $search = $request->input('search');
+            $products = Product::where('name', 'like', "%$search%")->get();
+            return view('search_page', compact('products'));
     }
 
     public function addToCart(Request $request)
